@@ -28,10 +28,10 @@ import static io.cucumber.junit.CucumberOptions.SnippetType.CAMELCASE;
 		//configuration 
 		features ={"srs/spec/features"},   //features
 		plugin ={"pretty","html:target/cucumber-report.html"},    //rapport
-		tags= ("@Login"),    //tags a tester
+		tags= ("@login"),    //tags a tester
 		//glue = {"src/test/java/com/e2etests/automation/step_definitions"}, // on l utilise quand le runweb n est aps dans un package : meme niveau
-		monochrome=true,
-		snippets= CAMELCASE
+		monochrome = true,
+		snippets = CAMELCASE
 	
 		)
 

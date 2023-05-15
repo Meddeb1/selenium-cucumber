@@ -1,6 +1,5 @@
 package com.e2etests.automation.utils;
 
-
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 
@@ -16,115 +15,100 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 import org.openqa.selenium.firefox.FirefoxProfile;
 
-
-
 import io.cucumber.java.Before;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-
 public class Setup {
 
+	private static WebDriver driver;
 
+	/**
+	 * 
+	 * This method is used to open browser. This method is called before the
+	 * 
+	 * invocation of each test method in the given class. In this method we need to
+	 * 
+	 * pass browser name which will invoke the respective driver.
+	 *
+	 * 
+	 * 
+	 * @throws MalformedURLException the malformed URL exception
+	 * 
+	 * @Before Methods annotated with @Before will execute before every scenario.
+	 * 
+	 */
 
-private static WebDriver driver;
+	@Before
 
+	public void setWebDriver() {
 
-/**
+		String browser = System.getProperty("browser");
 
-* This method is used to open browser. This method is called before the
+		if (browser == null) {
 
-* invocation of each test method in the given class. In this method we need to
+			browser = "chrome";
 
-* pass browser name which will invoke the respective driver.
+		}
 
-*
+		switch (browser) {
 
-* @throws MalformedURLException the malformed URL exception
+		case "chrome":
 
-* @Before Methods annotated with @Before will execute before every scenario.
+			System.setProperty("webdriver.http.factory", "jdk-http-client");
 
-*/
+			ChromeOptions chromeOptions = new ChromeOptions();
 
-@Before
+			WebDriverManager.chromedriver().setup();
 
-public void setWebDriver() {
+			driver = new ChromeDriver(chromeOptions);
 
+			driver.manage().window().maximize();
 
+			break;
 
-String browser = System.getProperty("browser");
+		case "firefox":
 
-if(browser == null) {
+			System.setProperty("webdriver.http.factory", "jdk-http-client");
 
-browser = "chrome";
+			FirefoxProfile profile = new FirefoxProfile();
 
-}
+			FirefoxOptions firefoxOptions = new FirefoxOptions();
 
-switch (browser) {
+			WebDriverManager.firefoxdriver().setup();
 
-case "chrome":
+			firefoxOptions.setCapability("platform", Platform.WIN10);
 
-System.setProperty("webdriver.http.factory", "jdk-http-client");
+			firefoxOptions.setProfile(profile);
 
-ChromeOptions chromeOptions = new ChromeOptions();
+			driver = new FirefoxDriver();
 
-WebDriverManager.chromedriver().setup();
+			driver.manage().window().maximize();
 
-driver = new ChromeDriver(chromeOptions);
+			break;
 
-driver.manage().window().maximize();
+		case "edge":
 
-break;
+			System.setProperty("webdriver.http.factory", "jdk-http-client");
 
-case "firefox":
+			WebDriverManager.edgedriver().setup();
 
-System.setProperty("webdriver.http.factory", "jdk-http-client");
+			driver = new EdgeDriver();
 
-FirefoxProfile profile = new FirefoxProfile();
+		default:
 
-FirefoxOptions firefoxOptions = new FirefoxOptions();
+			throw new IllegalArgumentException("Browser \"" + browser + "\" is not supported. ");
 
-WebDriverManager.firefoxdriver().setup();
+		}
 
-firefoxOptions.setCapability("platform", Platform.WIN10);
+	}
 
-firefoxOptions.setProfile(profile);
+	/* GETTER */
 
-driver = new FirefoxDriver();
+	public static WebDriver getDriver() {
 
-driver.manage().window().maximize();
+		return driver;
 
-break;
-
-case "edge":
-
-System.setProperty("webdriver.http.factory", "jdk-http-client");
-
-WebDriverManager.edgedriver().setup();
-
-driver = new EdgeDriver();
-
-
-
-default:
-
-throw new IllegalArgumentException("Browser \"" + browser + "\" is not supported. ");
-
-
-
-}
-
-}
-
-
-
-/*GETTER*/
-
-public static WebDriver getDriver() {
-
-return driver;
-
-}
-
+	}
 
 }
