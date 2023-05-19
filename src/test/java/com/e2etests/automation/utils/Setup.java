@@ -47,7 +47,7 @@ public class Setup {
 
 		if (browser == null) {
 
-			browser = "chrome";
+			browser = "firefox";
 
 		}
 

@@ -27,7 +27,7 @@ public class TearDown {
 			scenario.attach(screenshot, "image/png", "screenshot");
 		}
 		
-		Setup.getDriver().quit();
+		//Setup.getDriver().quit();
 		
 	}
 

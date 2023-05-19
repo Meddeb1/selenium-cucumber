@@ -1,11 +1,23 @@
 @login
 Feature: Je souhaite tester la page de la connexion de l application Swag labs
-  En tant que utilisateur je souhaite tester la page de la connexionde l application Swag Labs
+  ETQ utilisateur je souhaite tester la page de la connextion de l application Swag Labs
 
-  @login_CasPassant
+  @connexionCasPassant
   Scenario: Je souhaite tester la page de la connexion avec un cas passant
-    Given Je me connecte a l application Swag Labs     
-    When Je saisis le username "standard_user"          
-    And Je saisis le password "secret_sauce"            
-    And Je clique sur le bouton Login                   
-    Then Je me redirige la page home "Products"         
+    Given Je me connecte a l application Swag Labs
+    Then Je me redirige vers la page home "Products"
+  @login_casNonPassant
+  Scenario: Je souhaite tester la page connexion avec un cas non passant
+    Given Je me connecte sur l application
+    When Je saisi le username "hamdi"
+    When Je saisi le password "hamdi123"
+    When Je clique sur le bouton login
+    Then Le message d erreur s affiche "Epic sadface: Username and password do not match any user in this service"
+    
+    
+
+    
+    
+
+    
+       
