@@ -36,7 +36,8 @@ public class AboutPageStepDefinition {
 	public void jeMeRedirigeVersLaPageSauceMobile(String x) throws InterruptedException {
 		Thread.sleep(2000);
 		String title_page = AboutPage.title_p.getText();
-		Assert.assertEquals(title_page, x);
+		//System.out.println(title_page);
+		Assert.assertEquals(x,title_page);
 		//System.out.println(title_page);
 	    
 	}
